@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_key_pair" "test" {
     key_name   = "task1-key"
-    public_key = "${tls_private_key.t.public_key_openssh}"
+    public_key = "tls_private_key.t.public_key_openssh"
 }
 provider "tls" {}
 resource "tls_private_key" "t" {
@@ -63,7 +63,7 @@ resource "aws_instance" "web" {
     connection {
       type     = "ssh"
       user     = "ec2-user"
-      private_key = file("/tera/task1-key.pem")
+      private_key = file("/var/lib/jenkins/workspace/cloud-task1-code/task1-key.pem")
       host     = aws_instance.web.public_ip
     }
 
@@ -117,7 +117,7 @@ depends_on = [
   connection {
     type     = "ssh"
     user     = "ec2-user"
-    private_key = file("/tera/task1-key.pem")
+    private_key = file("/var/lib/jenkins/workspace/cloud-task1-code/task1-key.pem")
     host     = aws_instance.web.public_ip
   }
 

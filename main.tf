@@ -125,7 +125,7 @@ provisioner "remote-exec" {
     inline = [
       "sudo mkfs.ext4  /dev/xvdh",
       "sudo mount  /dev/xvdh  /var/www/html",
-      "sudo rm -rf /var/www/html/*"
+      "sudo rm -rf /var/www/html/*",
       "git clone https://github.com/Priyanshi-Garg/cloud-task1-code.git"
     ]
   }

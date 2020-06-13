@@ -13,7 +13,7 @@ resource "tls_private_key" "t" {
 }
 provider "local" {}
 resource "local_file" "key" {
-    content  = "${tls_private_key.t.private_key_pem}"
+    content  = "tls_private_key.t.private_key_pem"
     filename = "task1-key.pem"
 
 }
@@ -92,8 +92,8 @@ resource "aws_ebs_volume" "esb1" {
 
 resource "aws_volume_attachment" "ebs_att" {
   device_name = "/dev/sdh"
-  volume_id   = "${aws_ebs_volume.esb1.id}"
-  instance_id = "${aws_instance.web.id}"
+  volume_id   = "aws_ebs_volume.esb1.id"
+  instance_id = "aws_instance.web.id"
   force_detach = true
 }
 
@@ -103,7 +103,7 @@ depends_on = [
   ]
 
 	provisioner "local-exec" {
-	    command = "echo  ${aws_instance.web.public_ip} > publicip.txt"
+	    command = "echo  aws_instance.web.public_ip > publicip.txt"
   	}
 }
 
@@ -150,8 +150,8 @@ locals {
 }
 resource "aws_cloudfront_distribution" "task1-cloud" {
   origin {
-    domain_name = "${aws_s3_bucket.lwtask1pgs3.bucket_regional_domain_name}"
-    origin_id   = "${local.s3_origin_id}"
+    domain_name = "aws_s3_bucket.lwtask1pgs3.bucket_regional_domain_name"
+    origin_id   = "local.s3_origin_id"
 custom_origin_config {
     http_port = 80
     https_port = 80
@@ -163,7 +163,7 @@ enabled = true
 default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${local.s3_origin_id}"
+    target_origin_id = "local.s3_origin_id"
 forwarded_values {
     query_string = false
 cookies {

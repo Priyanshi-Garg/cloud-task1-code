@@ -184,7 +184,7 @@ viewer_certificate {
     cloudfront_default_certificate = true
   }
 }
-resource "null_resource" "nulllocal2"  {
+resource "null_resource" "nulllocal5"  {
 depends_on = [
     aws_cloudfront_distribution.task1-cloud,
   ]

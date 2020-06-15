@@ -138,7 +138,7 @@ depends_on = [
   ]
     bucket  = aws_s3_bucket.lwtask1pgs3.bucket
     key     = "myimage.jpg"
-    source = "C:/Users/Priyanshi Garg/Desktop/tera/web1/myimage.jpg"
+    source = "/terra/myimage.jpg"
     acl     = "public-read"
 }
 
